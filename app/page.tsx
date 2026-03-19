@@ -256,10 +256,10 @@ export default function Home() {
               Terms
             </a>
             <a
-              href="mailto:hello@toolbagcrm.com"
+              href="https://github.com/TSCarterJr/toolbagcrm-marketing"
               className="hover:text-white transition-colors"
             >
-              Contact
+              GitHub
             </a>
           </div>
           <div>© {new Date().getFullYear()} ToolbagCRM. All rights reserved.</div>
