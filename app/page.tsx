@@ -180,8 +180,7 @@ export default function Home() {
               Until your first booking
             </div>
             <div className="text-blue-200 text-sm mb-6">
-              Then a simple volume-based fee. The more you earn, the fairer it
-              gets.
+              Pricing details announced at launch. Early members get the best rates.
             </div>
             <a
               href="#waitlist"
