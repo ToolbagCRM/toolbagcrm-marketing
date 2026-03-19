@@ -255,12 +255,7 @@ export default function Home() {
             <a href="/terms" className="hover:text-white transition-colors">
               Terms
             </a>
-            <a
-              href="https://github.com/TSCarterJr/toolbagcrm-marketing"
-              className="hover:text-white transition-colors"
-            >
-              GitHub
-            </a>
+
           </div>
           <div>© {new Date().getFullYear()} ToolbagCRM. All rights reserved.</div>
         </div>
