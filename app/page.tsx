@@ -233,7 +233,7 @@ export default function Home() {
           </p>
           <WaitlistForm />
           <p className="text-gray-500 text-sm mt-4">
-            No spam. No contracts. Just early access.
+            Free until your first job. Early members get locked-in pricing.
           </p>
         </div>
       </section>
