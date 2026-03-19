@@ -208,9 +208,9 @@ export default function Home() {
             </div>
             <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700">
               <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-orange-500 rounded-2xl mx-auto mb-3 flex items-center justify-center text-2xl">🏗️</div>
-                <div className="font-bold text-lg">Carter&apos;s Plumbing</div>
-                <div className="text-gray-400 text-sm">jobs.cartersplumbing.com</div>
+                <div className="w-16 h-16 bg-orange-500 rounded-2xl mx-auto mb-3 flex items-center justify-center text-2xl">💥</div>
+                <div className="font-bold text-lg">ACME Plumbing Co.</div>
+                <div className="text-gray-400 text-sm">jobs.acmeplumbing.com</div>
               </div>
               <div className="space-y-3">
                 <div className="bg-gray-700 rounded-lg p-3 text-sm">
