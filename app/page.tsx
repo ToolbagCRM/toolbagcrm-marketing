@@ -88,7 +88,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white text-gray-900 antialiased">
       {/* NAV */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100">
+      <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Image src="/logo.png" alt="ToolbagCRM" width={40} height={40} />
