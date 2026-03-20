@@ -1,7 +1,14 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, type ReactNode } from "react";
+import { motion } from "framer-motion";
+import { type ReactNode, useState, useEffect } from "react";
+
+// Prevents SSR from baking in opacity:0 inline styles before hydration
+function useMounted() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted;
+}
 
 export function FadeIn({
   children,
@@ -14,8 +21,7 @@ export function FadeIn({
   delay?: number;
   direction?: "up" | "down" | "left" | "right" | "none";
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const mounted = useMounted();
 
   const directions = {
     up: { y: 24 },
@@ -25,11 +31,15 @@ export function FadeIn({
     none: {},
   };
 
+  if (!mounted) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
-      ref={ref}
       initial={{ opacity: 0, ...directions[direction] }}
-      animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.5, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={className}
     >
@@ -47,14 +57,17 @@ export function StaggerContainer({
   className?: string;
   staggerDelay?: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const mounted = useMounted();
+
+  if (!mounted) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div
-      ref={ref}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      whileInView="visible"
+      viewport={{ once: true, amount: 0 }}
       variants={{
         hidden: {},
         visible: { transition: { staggerChildren: staggerDelay } },
@@ -73,6 +86,12 @@ export function StaggerItem({
   children: ReactNode;
   className?: string;
 }) {
+  const mounted = useMounted();
+
+  if (!mounted) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       variants={{
