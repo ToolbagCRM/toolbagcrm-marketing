@@ -46,6 +46,11 @@ export function NumberTicker({
     [springValue, decimalPlaces],
   )
 
+  const initial = Intl.NumberFormat("en-US", {
+    minimumFractionDigits: decimalPlaces,
+    maximumFractionDigits: decimalPlaces,
+  }).format(direction === "down" ? value : 0)
+
   return (
     <span
       className={cn(
@@ -53,6 +58,8 @@ export function NumberTicker({
         className,
       )}
       ref={ref}
-    />
+    >
+      {initial}
+    </span>
   )
 }
