@@ -204,22 +204,25 @@ export default function Home() {
               <span className="text-[#f97316]">CRM</span>
             </span>
           </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="#pricing"
-              className="hidden sm:inline-flex text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium"
-            >
-              Pricing
-            </Link>
-            <Link
-              href="#features"
-              className="hidden sm:inline-flex text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium"
-            >
-              Features
-            </Link>
+          <div className="flex items-center gap-1">
+            {[
+              { href: "#how-it-works", label: "How It Works" },
+              { href: "#branding", label: "Branding" },
+              { href: "#features", label: "Features" },
+              { href: "#compare", label: "Compare" },
+              { href: "#pricing", label: "Pricing" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="hidden lg:inline-flex text-sm text-gray-500 hover:text-gray-900 transition-colors font-medium px-3 py-1.5 rounded-lg hover:bg-gray-50"
+              >
+                {link.label}
+              </Link>
+            ))}
             <Link
               href="#waitlist"
-              className="bg-[#1d4ed8] hover:bg-[#1e3a8a] text-white font-semibold px-5 py-2.5 rounded-full transition-colors text-sm"
+              className="ml-2 bg-[#1d4ed8] hover:bg-[#1e3a8a] text-white font-semibold px-5 py-2.5 rounded-full transition-colors text-sm"
             >
               Join Waitlist
             </Link>
@@ -353,7 +356,7 @@ export default function Home() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="py-24 sm:py-32 px-4">
+      <section id="how-it-works" className="py-24 sm:py-32 px-4">
         <div className="max-w-5xl mx-auto">
           <FadeIn className="text-center mb-16">
             <p className="text-[#1d4ed8] font-semibold text-sm uppercase tracking-widest mb-3">
@@ -423,7 +426,7 @@ export default function Home() {
       <VideoSection />
 
       {/* YOUR PLATFORM SECTION */}
-      <section className="py-24 sm:py-32 px-4 bg-gray-950 text-white overflow-hidden">
+      <section id="branding" className="py-24 sm:py-32 px-4 bg-gray-950 text-white overflow-hidden">
         <div className="max-w-5xl mx-auto">
 
           {/* Header */}
@@ -656,7 +659,7 @@ export default function Home() {
       </section>
 
       {/* COMPARISON TABLE */}
-      <section className="py-24 sm:py-32 px-4 bg-gray-950 overflow-hidden">
+      <section id="compare" className="py-24 sm:py-32 px-4 bg-gray-950 overflow-hidden">
         <div className="max-w-5xl mx-auto">
           <FadeIn className="text-center mb-14">
             <p className="text-[#f97316] font-semibold text-sm uppercase tracking-widest mb-3">
