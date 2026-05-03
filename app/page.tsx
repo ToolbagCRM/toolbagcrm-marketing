@@ -724,9 +724,9 @@ export default function Home() {
             <p className="text-gray-600 text-xs text-center mt-4">
               Based on publicly available information as of May 2026.{" "}
               &ldquo;Partial&rdquo; indicates limited or add-on functionality. Sources:{" "}
-              <a href="https://www.getjobber.com/pricing/" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400 transition-colors">Jobber</a>,{" "}
-              <a href="https://www.housecallpro.com/pricing/" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400 transition-colors">HouseCall Pro</a>,{" "}
-              <a href="https://www.servicetitan.com/pricing" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400 transition-colors">ServiceTitan</a>.
+              <a href="https://www.getjobber.com/features/" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400 transition-colors">Jobber</a>,{" "}
+              <a href="https://www.housecallpro.com/features/" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400 transition-colors">HouseCall Pro</a>,{" "}
+              <a href="https://www.servicetitan.com/features" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400 transition-colors">ServiceTitan</a>.
             </p>
           </FadeIn>
         </div>
