@@ -13,13 +13,13 @@ import {
   ArrowRight,
   Puzzle,
   Paintbrush,
-  ChevronRight,
+  Globe,
+  Zap,
+  Minus,
 } from "lucide-react";
-import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { Marquee } from "@/components/ui/marquee";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion";
-import { NumberTicker } from "@/components/ui/number-ticker";
 import AnimatedShaderHero from "@/components/ui/animated-shader-hero";
 
 const features = [
@@ -83,7 +83,113 @@ const industries = [
   "Garage Doors",
   "Concrete",
   "Tree Service",
+  "Bathtub Refinishing",
+  "Window Cleaning",
+  "Pressure Washing",
+  "Carpet Cleaning",
+  "Junk Removal",
+  "Moving Services",
+  "Mobile Dog Grooming",
+  "Handyman",
+  "Security Installation",
+  "Property Maintenance",
+  "Floor Refinishing",
+  "Gutter Cleaning",
+  "Chimney Sweep",
+  "Drywall & Plastering",
+  "Photography",
+  "Event Services",
+  "Personal Training",
 ];
+
+type CompareValue = boolean | "partial";
+
+const comparisons: { feature: string; sub: string; toolbag: CompareValue; jobber: CompareValue; hcp: CompareValue; st: CompareValue }[] = [
+  {
+    feature: "Flat monthly pricing",
+    sub: "One plan, no surprises",
+    toolbag: true,
+    jobber: false,
+    hcp: false,
+    st: false,
+  },
+  {
+    feature: "Unlimited users included",
+    sub: "No per-seat charges, ever",
+    toolbag: true,
+    jobber: false,
+    hcp: false,
+    st: false,
+  },
+  {
+    feature: "Full custom branding",
+    sub: "Your logo, colors, and identity",
+    toolbag: true,
+    jobber: "partial",
+    hcp: "partial",
+    st: "partial",
+  },
+  {
+    feature: "Your own domain",
+    sub: "e.g. portal.yourbusiness.com",
+    toolbag: true,
+    jobber: false,
+    hcp: false,
+    st: false,
+  },
+  {
+    feature: "Free until first booking",
+    sub: "We don't earn until you do",
+    toolbag: true,
+    jobber: false,
+    hcp: false,
+    st: false,
+  },
+  {
+    feature: "Any home service trade",
+    sub: "Not locked to one industry",
+    toolbag: true,
+    jobber: "partial",
+    hcp: "partial",
+    st: "partial",
+  },
+  {
+    feature: "Customers see your brand",
+    sub: "Not ours",
+    toolbag: true,
+    jobber: false,
+    hcp: false,
+    st: false,
+  },
+];
+
+function CompareCell({ value }: { value: boolean | "partial" }) {
+  if (value === true) {
+    return (
+      <div className="flex justify-center">
+        <div className="w-6 h-6 rounded-full bg-emerald-500/15 flex items-center justify-center">
+          <Check className="w-3.5 h-3.5 text-emerald-400" />
+        </div>
+      </div>
+    );
+  }
+  if (value === "partial") {
+    return (
+      <div className="flex justify-center">
+        <div className="w-6 h-6 rounded-full bg-yellow-500/10 flex items-center justify-center">
+          <Minus className="w-3.5 h-3.5 text-yellow-500/70" />
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="flex justify-center">
+      <div className="w-6 h-6 rounded-full bg-gray-800 flex items-center justify-center">
+        <X className="w-3 h-3 text-gray-600" />
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -131,7 +237,7 @@ export default function Home() {
           line1: "The CRM that doesn't",
           line2: "punish you for growing"
         }}
-        subtitle="Schedule jobs. Send quotes. Get paid. Add your whole crew without watching the bill go up. Built for contractors, not enterprises."
+        subtitle="Schedule jobs. Send quotes. Get paid. Add your whole crew without watching the bill go up. Built for home service businesses, not enterprises."
         buttons={{
           primary: {
             text: "Join the Waitlist",
@@ -203,11 +309,11 @@ export default function Home() {
                   <ul className="text-gray-600 space-y-3 text-sm">
                     <li className="flex items-start gap-3">
                       <Check className="w-4 h-4 text-[#1d4ed8] mt-0.5 shrink-0" />
-                      <span>Unlimited users, always included</span>
+                      <span>One flat monthly plan — unlimited users included</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-4 h-4 text-[#1d4ed8] mt-0.5 shrink-0" />
-                      <span>One flat monthly plan — unlimited users included</span>
+                      <span>Works for any home service business</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-4 h-4 text-[#1d4ed8] mt-0.5 shrink-0" />
@@ -225,8 +331,257 @@ export default function Home() {
         </div>
       </section>
 
+      {/* STATS BAR */}
+      <section className="py-12 bg-gray-950">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-gray-800">
+            {[
+              { value: "$0", label: "Per-seat fees, ever", accent: true },
+              { value: "∞", label: "Team members included", accent: false },
+              { value: "30+", label: "Service trade types", accent: true },
+              { value: "Free", label: "Until your first booking", accent: false },
+            ].map((stat) => (
+              <div key={stat.label} className="px-8 py-8 text-center">
+                <div className={`text-4xl lg:text-5xl font-black mb-1.5 ${stat.accent ? "text-[#f97316]" : "text-white"}`}>
+                  {stat.value}
+                </div>
+                <div className="text-gray-500 text-sm">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="py-24 sm:py-32 px-4">
+        <div className="max-w-5xl mx-auto">
+          <FadeIn className="text-center mb-16">
+            <p className="text-[#1d4ed8] font-semibold text-sm uppercase tracking-widest mb-3">
+              How it works
+            </p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-5">
+              Up and running{" "}
+              <span className="text-[#1d4ed8]">in an afternoon.</span>
+            </h2>
+            <p className="text-gray-500 text-lg max-w-xl mx-auto">
+              No onboarding calls. No IT department. No six-month implementation.
+              Your branded platform goes live today.
+            </p>
+          </FadeIn>
+
+          <div className="relative grid sm:grid-cols-3 gap-8 lg:gap-12">
+            {/* Connecting line */}
+            <div className="hidden sm:block absolute top-10 left-[calc(16.666%+20px)] right-[calc(16.666%+20px)] h-px"
+              style={{ background: "linear-gradient(90deg, transparent, #1d4ed840, #1d4ed880, #1d4ed840, transparent)" }}
+            />
+
+            {[
+              {
+                step: "01",
+                icon: Wrench,
+                title: "Create your workspace",
+                desc: "Sign up free — no credit card, no contracts. Your account is live in minutes. Free until you book your first job.",
+                color: "bg-[#1d4ed8]",
+              },
+              {
+                step: "02",
+                icon: Paintbrush,
+                title: "Make it 100% yours",
+                desc: "Upload your logo, pick your brand colors, connect your domain. Your customers will never see the words ToolbagCRM.",
+                color: "bg-[#f97316]",
+              },
+              {
+                step: "03",
+                icon: Zap,
+                title: "Get to work",
+                desc: "Schedule jobs, send quotes, collect payments. Your team, your customers, your brand — all in one place.",
+                color: "bg-[#1d4ed8]",
+              },
+            ].map((step, i) => (
+              <FadeIn key={step.step} delay={i * 0.15}>
+                <div className="text-center sm:text-left">
+                  <div className="relative inline-flex sm:flex items-center justify-center sm:justify-start mb-5">
+                    <div className={`w-11 h-11 rounded-xl ${step.color} flex items-center justify-center relative z-10 shadow-lg`}
+                      style={{ boxShadow: step.color.includes("f97316") ? "0 4px 20px rgba(249,115,22,0.35)" : "0 4px 20px rgba(29,78,216,0.35)" }}
+                    >
+                      <step.icon className="w-5 h-5 text-white" />
+                    </div>
+                    <span className="absolute -top-2 -right-2 sm:right-auto sm:-left-3 text-[10px] font-black text-gray-300 bg-gray-100 rounded-full w-5 h-5 flex items-center justify-center leading-none">
+                      {i + 1}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{step.desc}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* VIDEO SECTION */}
       <VideoSection />
+
+      {/* YOUR PLATFORM SECTION */}
+      <section className="py-24 sm:py-32 px-4 bg-gray-950 text-white overflow-hidden">
+        <div className="max-w-5xl mx-auto">
+
+          {/* Header */}
+          <FadeIn className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-[#f97316]/10 border border-[#f97316]/20 text-[#f97316] text-xs font-semibold px-3 py-1.5 rounded-full mb-6 uppercase tracking-widest">
+              <Globe className="w-3.5 h-3.5" />
+              White Label &amp; Custom Domain
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-5">
+              Your customers think you built{" "}
+              <span className="text-[#f97316]">a custom platform.</span>
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+              Every quote, invoice, customer portal, and scheduling link carries your
+              brand — your logo, your colors, your domain. ToolbagCRM is invisible to
+              everyone except you.
+            </p>
+          </FadeIn>
+
+          {/* Three branded instances */}
+          <StaggerContainer className="grid sm:grid-cols-3 gap-5 mb-16" staggerDelay={0.1}>
+            {/* Instance 1 — Premier Home Services */}
+            <StaggerItem>
+              <div className="rounded-2xl overflow-hidden border border-gray-800 bg-gray-900 shadow-2xl">
+                {/* Browser bar */}
+                <div className="flex items-center gap-2 px-3 py-2.5 border-b border-gray-800 bg-gray-900/80">
+                  <div className="flex gap-1">
+                    <div className="w-2 h-2 rounded-full bg-gray-700" />
+                    <div className="w-2 h-2 rounded-full bg-gray-700" />
+                    <div className="w-2 h-2 rounded-full bg-gray-700" />
+                  </div>
+                  <div className="flex-1 bg-gray-800 rounded px-2 py-0.5 text-[9px] text-gray-500 text-center truncate">
+                    portal.premierhomeservices.com
+                  </div>
+                </div>
+                {/* Content */}
+                <div className="p-4">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-7 h-7 rounded-lg bg-[#1d4ed8] flex items-center justify-center text-[10px] font-black text-white">P</div>
+                    <div>
+                      <div className="text-white text-xs font-bold leading-tight">Premier Home Services</div>
+                      <div className="text-gray-500 text-[9px]">Plumbing &amp; HVAC</div>
+                    </div>
+                  </div>
+                  <div className="bg-gray-800/80 rounded-xl p-3 mb-2 border border-gray-700/50">
+                    <div className="text-[9px] text-gray-500 mb-0.5">Invoice #2847</div>
+                    <div className="text-white text-xs font-semibold mb-1">Water heater replacement</div>
+                    <div className="text-[#1d4ed8] font-black text-base">$1,450</div>
+                  </div>
+                  <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-2 text-center">
+                    <div className="text-emerald-400 text-[9px] font-semibold flex items-center justify-center gap-1">
+                      <Check className="w-2.5 h-2.5" /> Paid — Thank you!
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </StaggerItem>
+
+            {/* Instance 2 — Sparkle Clean Co. */}
+            <StaggerItem>
+              <div className="rounded-2xl overflow-hidden border border-teal-900/40 bg-gray-900 shadow-2xl ring-1 ring-teal-500/10">
+                {/* Browser bar */}
+                <div className="flex items-center gap-2 px-3 py-2.5 border-b border-teal-900/30 bg-gray-900/80">
+                  <div className="flex gap-1">
+                    <div className="w-2 h-2 rounded-full bg-gray-700" />
+                    <div className="w-2 h-2 rounded-full bg-gray-700" />
+                    <div className="w-2 h-2 rounded-full bg-gray-700" />
+                  </div>
+                  <div className="flex-1 bg-gray-800 rounded px-2 py-0.5 text-[9px] text-gray-500 text-center truncate">
+                    book.sparkleclean.co
+                  </div>
+                </div>
+                {/* Content */}
+                <div className="p-4">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-7 h-7 rounded-lg bg-teal-500 flex items-center justify-center text-[10px] font-black text-white">SC</div>
+                    <div>
+                      <div className="text-white text-xs font-bold leading-tight">Sparkle Clean Co.</div>
+                      <div className="text-gray-500 text-[9px]">Residential Cleaning</div>
+                    </div>
+                  </div>
+                  <div className="bg-gray-800/80 rounded-xl p-3 mb-2 border border-gray-700/50">
+                    <div className="text-[9px] text-gray-500 mb-0.5">Upcoming Job — Tue May 6</div>
+                    <div className="text-white text-xs font-semibold mb-1">Deep clean — 3 bed/2 bath</div>
+                    <div className="text-teal-400 font-black text-base">$280</div>
+                  </div>
+                  <div className="bg-teal-500/10 border border-teal-500/20 rounded-lg p-2 text-center">
+                    <div className="text-teal-400 text-[9px] font-semibold flex items-center justify-center gap-1">
+                      <Check className="w-2.5 h-2.5" /> Booking confirmed
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </StaggerItem>
+
+            {/* Instance 3 — GreenWorks Landscaping */}
+            <StaggerItem>
+              <div className="rounded-2xl overflow-hidden border border-gray-800 bg-gray-900 shadow-2xl">
+                {/* Browser bar */}
+                <div className="flex items-center gap-2 px-3 py-2.5 border-b border-gray-800 bg-gray-900/80">
+                  <div className="flex gap-1">
+                    <div className="w-2 h-2 rounded-full bg-gray-700" />
+                    <div className="w-2 h-2 rounded-full bg-gray-700" />
+                    <div className="w-2 h-2 rounded-full bg-gray-700" />
+                  </div>
+                  <div className="flex-1 bg-gray-800 rounded px-2 py-0.5 text-[9px] text-gray-500 text-center truncate">
+                    jobs.greenworkslandscaping.com
+                  </div>
+                </div>
+                {/* Content */}
+                <div className="p-4">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-7 h-7 rounded-lg bg-green-600 flex items-center justify-center text-[10px] font-black text-white">GW</div>
+                    <div>
+                      <div className="text-white text-xs font-bold leading-tight">GreenWorks Landscaping</div>
+                      <div className="text-gray-500 text-[9px]">Lawn &amp; Garden Services</div>
+                    </div>
+                  </div>
+                  <div className="bg-gray-800/80 rounded-xl p-3 mb-2 border border-gray-700/50">
+                    <div className="text-[9px] text-gray-500 mb-0.5">Quote #0551 — Awaiting approval</div>
+                    <div className="text-white text-xs font-semibold mb-1">Spring cleanup + mulching</div>
+                    <div className="text-green-400 font-black text-base">$620</div>
+                  </div>
+                  <div className="bg-gray-800 rounded-lg p-2 text-center">
+                    <div className="text-gray-400 text-[9px] font-semibold">Tap to approve quote →</div>
+                  </div>
+                </div>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
+
+          {/* Bottom callout */}
+          <FadeIn delay={0.3}>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 text-center">
+              <p className="text-gray-300 text-lg font-medium mb-2">
+                Three different businesses. Three completely different brands.
+              </p>
+              <p className="text-gray-500 text-sm max-w-xl mx-auto">
+                Same powerful platform underneath — none of them look like they&apos;re using the same software.
+                Because to your customers, you built this yourself.
+              </p>
+              <div className="flex flex-wrap justify-center gap-6 mt-8">
+                {[
+                  { icon: Paintbrush, label: "Your logo & colors" },
+                  { icon: Globe, label: "Your own domain" },
+                  { icon: FileText, label: "Branded quotes & invoices" },
+                  { icon: Users, label: "Your customer portal" },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-center gap-2 text-gray-400 text-sm">
+                    <item.icon className="w-4 h-4 text-[#f97316]" />
+                    {item.label}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
 
       {/* FEATURES */}
       <section id="features" className="py-24 sm:py-32 px-4 bg-gray-50/80">
@@ -300,102 +655,73 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHITE LABEL */}
-      <section className="py-24 sm:py-32 px-4 bg-gray-950 text-white overflow-hidden">
+      {/* COMPARISON TABLE */}
+      <section className="py-24 sm:py-32 px-4 bg-gray-950 overflow-hidden">
         <div className="max-w-5xl mx-auto">
-          <div className="grid sm:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <FadeIn direction="left">
-              <div>
-                <div className="inline-flex items-center gap-2 bg-[#f97316]/10 border border-[#f97316]/20 text-[#f97316] text-xs font-semibold px-3 py-1 rounded-full mb-6 uppercase tracking-widest">
-                  <Paintbrush className="w-3.5 h-3.5" />
-                  White Label
-                </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-5">
-                  Your brand.
-                  <br />
-                  <span className="text-[#f97316]">Your business.</span>
-                </h2>
-                <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-                  Put your logo on everything. Your customers see your brand on
-                  quotes, invoices, the portal, all of it. Look like a big
-                  operation even if it&apos;s just you and a van.
-                </p>
-                <ul className="space-y-4">
-                  {[
-                    "Custom logo and color scheme across the entire platform",
-                    "Branded estimates, invoices, and customer emails",
-                    "Custom domain for your client portal (e.g. jobs.yourbusiness.com)",
-                    "Professional presence without the enterprise price tag",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-gray-300 text-sm">
-                      <div className="w-5 h-5 rounded-full bg-[#f97316]/20 flex items-center justify-center mt-0.5 shrink-0">
-                        <Check className="w-3 h-3 text-[#f97316]" />
-                      </div>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </FadeIn>
+          <FadeIn className="text-center mb-14">
+            <p className="text-[#f97316] font-semibold text-sm uppercase tracking-widest mb-3">
+              How we compare
+            </p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white mb-5">
+              We built what they{" "}
+              <span className="text-[#f97316]">wouldn&apos;t.</span>
+            </h2>
+            <p className="text-gray-400 text-lg max-w-xl mx-auto">
+              The big players charge more as you grow, show their branding to your customers, and lock you to a generic domain. We don&apos;t.
+            </p>
+          </FadeIn>
 
-            <FadeIn direction="right" delay={0.2}>
-              <div className="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden shadow-2xl shadow-black/50">
-                {/* Mock browser bar */}
-                <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-800">
-                  <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-gray-700" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-gray-700" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-gray-700" />
-                  </div>
-                  <div className="flex-1 mx-2">
-                    <div className="bg-gray-800 rounded-md px-3 py-1 text-xs text-gray-500 text-center">
-                      jobs.acmehomeservices.com
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <div className="text-center mb-6">
-                    <div className="w-14 h-14 bg-[#f97316] rounded-2xl mx-auto mb-3 flex items-center justify-center text-xl font-black text-white">
-                      A
-                    </div>
-                    <div className="font-bold text-lg">ACME Home Services</div>
-                    <div className="text-gray-500 text-xs mt-1">
-                      Licensed &amp; Insured
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="bg-gray-800/80 rounded-xl p-4 text-sm border border-gray-700/50">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="text-gray-400 text-xs">
-                          Quote #3107
+          <FadeIn delay={0.1}>
+            <div className="overflow-x-auto rounded-2xl border border-gray-800">
+              <table className="w-full min-w-[600px]">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="text-left px-6 py-5 text-gray-500 text-sm font-medium w-[40%]" />
+                    <th className="px-4 py-5 text-center w-[15%]">
+                      <div className="inline-flex flex-col items-center gap-1">
+                        <div className="bg-[#f97316] text-white text-[10px] font-black px-2 py-0.5 rounded-full tracking-wider uppercase">
+                          Us
                         </div>
-                        <div className="text-xs text-gray-500">W. E. Coyote</div>
+                        <span className="text-white font-bold text-sm">ToolbagCRM</span>
                       </div>
-                      <div className="font-semibold mb-1">
-                        Giant magnet installation — roof mount
-                      </div>
-                      <div className="text-[#f97316] font-bold text-lg">
-                        $4,999
-                      </div>
-                    </div>
+                    </th>
+                    <th className="px-4 py-5 text-center text-gray-500 text-sm font-medium w-[15%]">Jobber</th>
+                    <th className="px-4 py-5 text-center text-gray-500 text-sm font-medium w-[15%]">HouseCallPro</th>
+                    <th className="px-4 py-5 text-center text-gray-500 text-sm font-medium w-[15%]">ServiceTitan</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-800/60">
+                  {comparisons.map((row, i) => (
+                    <tr
+                      key={row.feature}
+                      className={i % 2 === 0 ? "bg-gray-900/30" : ""}
+                    >
+                      <td className="px-6 py-4">
+                        <div className="text-gray-200 text-sm font-medium">{row.feature}</div>
+                        <div className="text-gray-600 text-xs mt-0.5">{row.sub}</div>
+                      </td>
+                      <td className="px-4 py-4 bg-[#f97316]/4">
+                        <CompareCell value={row.toolbag} />
+                      </td>
+                      <td className="px-4 py-4">
+                        <CompareCell value={row.jobber} />
+                      </td>
+                      <td className="px-4 py-4">
+                        <CompareCell value={row.hcp} />
+                      </td>
+                      <td className="px-4 py-4">
+                        <CompareCell value={row.st} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-                    <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-3 text-center">
-                      <div className="flex items-center justify-center gap-2 text-emerald-400 font-semibold text-sm">
-                        <Check className="w-4 h-4" />
-                        Approved by customer
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="text-center text-gray-600 text-[10px] mt-5 uppercase tracking-widest">
-                    Powered by ToolbagCRM
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-          </div>
+            <p className="text-gray-600 text-xs text-center mt-4">
+              Competitor features based on publicly available information as of 2025. &ldquo;Partial&rdquo; indicates limited or add-on functionality.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
@@ -455,23 +781,33 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <FadeIn className="text-center mb-12">
             <p className="text-[#f97316] font-semibold text-sm uppercase tracking-widest mb-3">
-              Industries
+              Any service, any trade
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-5">
-              Built for the <span className="text-[#f97316]">trades</span>
+              If you show up and do the work,{" "}
+              <span className="text-[#f97316]">this is for you.</span>
             </h2>
             <p className="text-gray-500 text-lg max-w-xl mx-auto">
-              Whether you&apos;re running a two-person plumbing shop or a 50-tech
-              HVAC company, ToolbagCRM scales with you.
+              ToolbagCRM works for any home or field service business — from a one-person bathtub refinishing operation to a 50-tech HVAC company.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <Marquee pauseOnHover className="[--duration:30s]">
+            <Marquee pauseOnHover className="[--duration:40s]">
               {industries.map((ind) => (
                 <div
                   key={ind}
                   className="bg-white border border-gray-100 text-gray-700 font-semibold px-5 py-2.5 rounded-full text-sm shadow-sm hover:border-[#1d4ed8]/30 hover:shadow-md transition-all cursor-default"
+                >
+                  {ind}
+                </div>
+              ))}
+            </Marquee>
+            <Marquee pauseOnHover reverse className="[--duration:35s] mt-3">
+              {[...industries].reverse().map((ind) => (
+                <div
+                  key={ind + "-r"}
+                  className="bg-white border border-gray-100 text-gray-700 font-semibold px-5 py-2.5 rounded-full text-sm shadow-sm hover:border-[#f97316]/30 hover:shadow-md transition-all cursor-default"
                 >
                   {ind}
                 </div>
