@@ -207,7 +207,7 @@ export default function Home() {
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-4 h-4 text-[#1d4ed8] mt-0.5 shrink-0" />
-                      <span>Pricing based on volume of work, not headcount</span>
+                      <span>One flat monthly plan — unlimited users included</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-4 h-4 text-[#1d4ed8] mt-0.5 shrink-0" />
@@ -414,8 +414,8 @@ export default function Home() {
               <span className="text-[#f97316]">Then we grow together.</span>
             </h2>
             <p className="text-blue-100/70 text-lg mb-12 max-w-xl mx-auto">
-              We don&apos;t make money until you make money. Pricing is based on
-              your volume of work, not how many people are on your team.
+              We don&apos;t make money until you make money. One flat monthly
+              plan — bring your whole team, no per-seat fees, ever.
             </p>
           </FadeIn>
 
